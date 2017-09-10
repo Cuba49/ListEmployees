@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ListEmployee.Models.Unit>
+
+@{
+    ViewBag.Title = "ListUnits";
+}
+
+<h2 align="center">List Units</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitName)
+        </td>
+        <td>
+           
+            @Html.ActionLink("Details", "Details", new { id=item.UnitId }) 
+           
+        </td>
+    </tr>
+}
+
+</table>

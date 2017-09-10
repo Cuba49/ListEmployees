@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Units>
+<Unit Title="DMS Team">
+<Employee Name="Ivanov I.I." Position="Lead Developer" HireDate="2012.12.12"/>
+<Employee Name="Petrov P.P." Position="Project Manager" HireDate="2014.01.01"/>
+</Unit>
+<Unit Title="Soft">
+<Employee Name="Kazan I.I." Position="Junior" HireDate="2016.08.15"/>
+<Employee Name="Vilun P.P." Position="Middle Developer" HireDate="2014.11.25"/>
+</Unit>
+</Units>

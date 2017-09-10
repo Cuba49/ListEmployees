@@ -1,0 +1,84 @@
+﻿@model ListEmployee.Models.EmployeesListViewModel
+
+@{
+    ViewBag.Title = "List Employees";
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+@Scripts.Render("~/bundles/bootstrap")
+@* Load datatable css *@
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+@* Load datatable js *@
+<link href="~/css/myCss.css" rel="stylesheet" />
+
+<body>
+    <div style="width:90%; margin: auto">
+        <h2 align="center">List Employees</h2>
+        <div class="col-md-4">
+            @using (Html.BeginForm("Clear", "Employees"))
+            {
+                <input class="btn btn-warning " type="submit" value="Clear All Records" />
+            }
+        </div>
+        <div align="right" class="col-md-8">
+            @using (Html.BeginForm("Upload", "Employees", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="fileform">
+                    <div id="fileformlabel"></div>
+                    <div class="selectbutton">Chose File</div>
+                    <input type="file" name="upload" id="upload" onchange="getName(this.value);" />
+                </div>
+                @*<input class="btn btn-default" type="file" name="upload" value="Chose File..." />*@<br>
+                <input class="btn btn-success" type="submit" value="Load" />
+            }
+        </div>
+
+        <br />
+
+        <form method="get">
+            <div class="form-inline">
+                <label class="control-label">Unit: </label>
+                @Html.DropDownList("team", Model.Units as SelectList,
+                    htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })
+            </div>
+        </form>
+
+        <table id="tableData">
+            <tr>
+                <th>Unit</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Hire Date</th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Employees)
+            {
+                <tr ng-class-odd="'odd'" ng-class-even="'even'">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Unit.UnitName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeePosition)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeHireDate)
+                    </td>
+                    <td>
+                        |@Html.ActionLink("Details", "Details", new { id = item.EmployeeId })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+@section Scripts{
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/myScripts.js"></script>
+    <script type="text/javascript">
+      var message = '@message';
+      if(message) alert(message);
+    </script>
+}
